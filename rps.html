@@ -6,8 +6,103 @@
 </head>
 <body>
   <script>
-    // Your JavaScript goes here!
+    // Initialize score trackers 
+    var playerScore = 0;
+    var computerScore = 0;
 
+    // computerPlay() - Randomly chooses/returns one of three values: "Rock," "Paper" or "Scissors."
+    function computerPlay() {
+        let numberPick = Math.floor(Math.random() * (+4 - +1)) + +1; 
+        //console.log(numberPick);
+
+        if (numberPick == 1) {
+            return("Rock");
+        } else if (numberPick == 2) {
+            return("Paper");
+        } else if (numberPick == 3) {
+            return("Scissors");
+        }
+    }
+    
+    // playRound() compares computer/player selections, adjusts score and returns a string declaring the winner.
+    function playRound(playerSelection, computerSelection) 
+    {
+        if ((computerSelection == "Rock" && playerSelection == "ROCK") || 
+        (computerSelection == "Paper" && playerSelection == "PAPER") ||
+        (computerSelection == "Scissors" && playerSelection == "SCISSORS"))
+        {
+            return `${computerSelection} and ${playerSelection}. It's a tie! No one wins! The score is COMPUTER: ${computerScore}, YOU: ${playerScore}.`;
+        }
+        else if ((computerSelection == "Rock" && playerSelection == "SCISSORS") || 
+        (computerSelection == "Paper" && playerSelection == "ROCK") ||
+        (computerSelection == "Scissors" && playerSelection == "PAPER"))
+        {
+            computerScore++;
+            return `${computerSelection} beats ${playerSelection}. You lose! The score is COMPUTER: ${computerScore}, YOU: ${playerScore}.`;
+        }
+        else if ((computerSelection == "Rock" && playerSelection == "PAPER") || 
+        (computerSelection == "Paper" && playerSelection == "SCISSORS") ||
+        (computerSelection == "Scissors" && playerSelection == "ROCK")) 
+        {
+            playerScore++;
+            return `${computerSelection} loses to ${playerSelection}. You WIN!!! The score is COMPUTER: ${computerScore}, YOU: ${playerScore}.`;
+        }
+    }
+
+    function playerPlay () {
+        let playerSelection = prompt("Please type 'ROCK,' 'PAPER,' or 'SCISSORS.''", "ROCK, PAPER or SCISSORS");
+    
+        // Change player input to upper case.
+        playerSelection = playerSelection.toUpperCase();
+        
+        // Check if it's a valid input.
+        if ((playerSelection != "ROCK") && (playerSelection != "SCISSORS") && (playerSelection != "PAPER")) {
+            console.log("Hmmmmmm... That's not a valid input. Let's just go with ROCK.");
+            playerSelection = "ROCK";
+        }
+
+        return playerSelection;
+    }
+
+
+    // Computer/player make their choices.
+    let computerSelection = computerPlay();
+    
+    // Get player input.
+    let playerSelection = playerPlay()
+
+    // Calls the playRound() function and prints its string to the console.
+    console.log("Round ONE of FIVE!");
+    console.log(playRound(playerSelection, computerSelection));
+
+    console.log("Round TWO of FIVE!");
+    computerSelection = computerPlay();
+    playerSelection = playerPlay();
+    console.log(playRound(playerSelection, computerSelection));
+
+    console.log("Round THREE of FIVE!");
+    computerSelection = computerPlay();
+    playerSelection = playerPlay();
+    console.log(playRound(playerSelection, computerSelection));
+
+    console.log("Round FOUR of FIVE!");
+    computerSelection = computerPlay();
+    playerSelection = playerPlay();
+    console.log(playRound(playerSelection, computerSelection));
+
+    console.log("Round FIVE of FIVE! LAST ROUND!");
+    computerSelection = computerPlay();
+    playerSelection = playerPlay();
+    console.log(playRound(playerSelection, computerSelection));
+
+    if (playerScore > computerScore) {
+        console.log("YOU WIN!!!");
+    } else if (playerScore < computerScore) {
+        console.log("YOU LOSE!!!")
+    } else {
+        console.log("It's a TIE!!!")
+    }
+    
   </script>
 </body>
 </html>
