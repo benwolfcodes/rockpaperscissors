@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock, Paper, Scissors.</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <h1>Rock, Paper, Scissors.</h1>
+
+    <div class="buttons">
+        <button class="button" id="rockButton"><img src="rock.png"></button>
+        <button class="button" id="paperButton"><img src="paper.png"></button>
+        <button class="button" id="scissorsButton"><img src="scissors.png"></button>
+    </div>
+
+    <div id="score">    
+        <h3 class="sboard" id="pscore">Player Score: </h3>
+        <h3 class="sboard" id="cscore">Computer Score: </h3>
+    </div>
+
+    <div id="commentary"></div>
+
+
+    <script>
+        // Initialize score trackers 
+        var playerScore = 0;
+        var computerScore = 0;
+
+        // computerPlay() - Randomly chooses/returns one of three values: "Rock," "Paper" or "Scissors."
+        function computerPlay() {
+            let numberPick = Math.floor(Math.random() * (+4 - +1)) + +1; 
+            // console.log(numberPick);
+
+            if (numberPick == 1) {
+                console.log("Computer picks Rock");
+                return("Rock");
+            } else if (numberPick == 2) {
+                console.log("Computer picks Paper");
+                return("Paper");
+            } else if (numberPick == 3) {
+                console.log("Computer picks Scissors");
+                return("Scissors");
+            }
+        }
+        
+        // playRound() compares computer/player selections, adjusts score and returns a string declaring the winner.
+        function playRound(computerSelection, playerSelection) 
+        {
+            if ((computerSelection == "Rock" && playerSelection == "Rock") || 
+            (computerSelection == "Paper" && playerSelection == "Paper") ||
+            (computerSelection == "Scissors" && playerSelection == "Scissors"))
+            {
+                newScore = document.createElement('p');
+                newScore.textContent = `${computerSelection} and ${playerSelection}. It's a tie! No one wins!`
+                scoreDiv.appendChild(newScore);
+            }
+            else if ((computerSelection == "Rock" && playerSelection == "Scissors") || 
+            (computerSelection == "Paper" && playerSelection == "Rock") ||
+            (computerSelection == "Scissors" && playerSelection == "Paper"))
+            {
+                computerScore++;
+                newScore = document.createElement('p');
+                newScore.textContent = `${computerSelection} beats ${playerSelection}. You lose!`
+                scoreDiv.appendChild(newScore);
+                document.getElementById("cscore").innerHTML = `Computer Score: ${computerScore}`;
+            }
+            else if ((computerSelection == "Rock" && playerSelection == "Paper") || 
+            (computerSelection == "Paper" && playerSelection == "Scissors") ||
+            (computerSelection == "Scissors" && playerSelection == "Rock")) 
+            {
+                playerScore++;
+                newScore = document.createElement('p');
+                newScore.textContent = `${computerSelection} loses to ${playerSelection}. You WIN!!!`
+                scoreDiv.appendChild(newScore);
+                document.getElementById("pscore").innerHTML = `Player Score: ${playerScore}`;
+            }
+        }
+
+        const scoreDiv = document.querySelector("#commentary");
+
+        const rockButton = document.querySelector("#rockButton");
+        rockButton.addEventListener('click', () => {
+            computerPick = computerPlay();
+            console.log(`Computer chooses ${computerPick}`);
+            playRound(computerPick, "Rock");
+        });
+
+        const paperButton = document.querySelector("#paperButton");
+        paperButton.addEventListener("click", () => {
+            computerPick = computerPlay();
+            console.log(`Computer chooses ${computerPick}`);
+            playRound(computerPick, "Paper");
+        });
+
+        const scissorsButton = document.querySelector("#scissorsButton");
+        scissorsButton.addEventListener("click", () => {
+            computerPick = computerPlay();
+            console.log(`Computer chooses ${computerPick}`);
+            playRound(computerPick, "Scissors");
+        });
+
+    </script>
+</body>
+</html>
