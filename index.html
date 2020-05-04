@@ -54,7 +54,7 @@
             (computerSelection == "Scissors" && playerSelection == "Scissors"))
             {
                 newScore = document.createElement('p');
-                newScore.textContent = `${computerSelection} and ${playerSelection}. It's a tie! No one wins!`
+                newScore.textContent = `You chose ${playerSelection}. Computer chose ${computerSelection}. It's a tie! No one wins!`
                 scoreDiv.appendChild(newScore);
             }
             else if ((computerSelection == "Rock" && playerSelection == "Scissors") || 
@@ -63,7 +63,7 @@
             {
                 computerScore++;
                 newScore = document.createElement('p');
-                newScore.textContent = `${computerSelection} beats ${playerSelection}. You lose!`
+                newScore.textContent = `You chose ${playerSelection}. Computer chose ${computerSelection}. You lose!`
                 scoreDiv.appendChild(newScore);
                 document.getElementById("cscore").innerHTML = `Computer Score: ${computerScore}`;
             }
@@ -73,7 +73,7 @@
             {
                 playerScore++;
                 newScore = document.createElement('p');
-                newScore.textContent = `${computerSelection} loses to ${playerSelection}. You WIN!!!`
+                newScore.textContent = `You chose ${playerSelection}. Computer chose ${computerSelection}. You WIN!!!`
                 scoreDiv.appendChild(newScore);
                 document.getElementById("pscore").innerHTML = `Player Score: ${playerScore}`;
             }
